@@ -33,4 +33,5 @@
 |text|varchar2|评论内容|
 |status|int|评论状态(0-删除1-使用|
 |update_time|date|更新时间|
-:|:外键（bid）
+:|:---:|:----:|:
+:|:外键（bid）:|:
