@@ -1,2 +1,4 @@
-
-你你好   aafjadsgjasj
+|名称|类型|说明|
+|----|---|----|
+|id|int|用户id,主键|
+|name|varchar2|用户昵称|
