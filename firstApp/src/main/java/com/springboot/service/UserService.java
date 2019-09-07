@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
  * Created by duyuqiang on 2019/9/5.
  */
 @Service
-public class UserService {
+public class UserService implements  UserMapper{
     @Autowired
     UserMapper userMapper;
+
+    @Override
     public User Sel(){
         return userMapper.Sel();
     }

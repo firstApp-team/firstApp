@@ -9,9 +9,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by duyuqiang on 2019/9/5.
  */
-@Repository
 @Mapper
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-public interface UserMapper {
+public interface UserMapper{
     User Sel();
 }
