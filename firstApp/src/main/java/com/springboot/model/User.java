@@ -18,20 +18,20 @@ public class User {
         super();
     }
 
-    public int getUserid() {
+    public int getId() {
         return id;
     }
 
-    public String getUsername() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setUsername(String username) {
-        this.name = username;
-    }
-
-    public void setUserid(int userid) {
-        this.id = userid;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
