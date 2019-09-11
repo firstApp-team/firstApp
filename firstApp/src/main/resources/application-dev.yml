@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   mvc:
       view:
-        prefix: /WEB-INF/
+        prefix: /WEB-INF/jsp/
         suffix: .jsp
 
 mybatis:

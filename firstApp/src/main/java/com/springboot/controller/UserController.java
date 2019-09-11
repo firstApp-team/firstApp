@@ -1,6 +1,8 @@
 package com.springboot.controller;
 
 import com.springboot.model.User;
+import com.springboot.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +18,23 @@ import java.util.Map;
  */
 @Controller
 public class UserController {
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(value="/login")
+    public ModelAndView getLoger(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("login");
+        return mv;
+    }
+
+    @RequestMapping(value="/register")
+    public ModelAndView getRegister(User user){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("registered");
+        return mv;
+    }
+
     @RequestMapping(value="/getUser", method = RequestMethod.GET)
     public ModelAndView GetUser(){
 
@@ -24,9 +43,7 @@ public class UserController {
         mv.addObject("message","hello kitty");
 
         //类
-        User user = new User();
-        user.setId(2);
-        user.setName("b");
+        User user = userService.Sel();
         mv.addObject("user",user);
 
         //List

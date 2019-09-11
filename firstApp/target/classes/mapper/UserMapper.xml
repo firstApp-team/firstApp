@@ -18,4 +18,9 @@
             resultType="com.springboot.model.User"> <!-- 创建对应user实体类的位置 -->
         select * from test.t_user;
     </select>
+
+    <select id="Regist"
+            resultType="com.springboot.model.User"> <!-- 创建对应user实体类的位置 -->
+        insert into test.t_user(name) value ;
+    </select>
 </mapper>
