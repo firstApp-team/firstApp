@@ -15,6 +15,7 @@ engine=Innodb default charset=utf8;
 create table if not exists t_blog(
 bid int comment '博客id' primary key auto_increment,
 id int comment '用户Id',
+bname varchar(4000) comment '博客名称',
 text varchar(4000) comment '博客内容',
 status int comment '博客状态(0-删除，1-使用)',
 update_time date comment '更新时间',
