@@ -1,5 +1,5 @@
 create table if not exists t_user(
-id int comment '用户id' primary key,
+id int comment '用户id' primary key auto_increment,
 name varchar(100) comment '用户昵称'
 )
 engine=Innodb default charset=utf8;
@@ -13,7 +13,7 @@ primary key(id,fid)
 engine=Innodb default charset=utf8;
 
 create table if not exists t_blog(
-bid int comment '博客id' primary key,
+bid int comment '博客id' primary key auto_increment,
 id int comment '用户Id',
 text varchar(4000) comment '博客内容',
 status int comment '博客状态(0-删除，1-使用)',
