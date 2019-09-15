@@ -14,7 +14,12 @@ public class UserService implements  UserMapper{
     UserMapper userMapper;
 
     @Override
-    public User Sel(){
-        return userMapper.Sel();
+    public User Sel(String name){
+        return userMapper.Sel(name);
+    }
+
+    @Override
+    public void Regist(String name){
+        userMapper.Regist(name);
     }
 }

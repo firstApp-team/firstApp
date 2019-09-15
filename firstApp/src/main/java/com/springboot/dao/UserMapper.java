@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper{
 //    查询
-    User Sel();
+    User Sel(String name);
 
 //    注册
-
+    void Regist(String name);
 }

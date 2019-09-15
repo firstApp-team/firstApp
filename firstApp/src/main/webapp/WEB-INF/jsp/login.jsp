@@ -12,7 +12,7 @@
 </head>
 <body>
 <h2 align="center"><font color="red" />用户登录页面</h2>
-<form action="success.jsp" method="post">
+<form action="/blog" method="post">
     <table align="center" border="1">
     <tr>
         <td>用户名:</td>

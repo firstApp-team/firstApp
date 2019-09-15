@@ -16,11 +16,10 @@
     <!-- 根据_key查询得到一个user对象-->
     <select id="Sel"
             resultType="com.springboot.model.User"> <!-- 创建对应user实体类的位置 -->
-        select * from test.t_user;
+        select * from test.t_user where name=#{name};
     </select>
 
-    <select id="Regist"
-            resultType="com.springboot.model.User"> <!-- 创建对应user实体类的位置 -->
-        insert into test.t_user(name) value ;
-    </select>
+    <insert id="Regist">
+        insert into test.t_user(name) value (#{name});
+    </insert>
 </mapper>

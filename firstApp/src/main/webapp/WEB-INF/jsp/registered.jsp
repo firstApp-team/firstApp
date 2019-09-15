@@ -12,7 +12,7 @@
 </head>
 <body align="center">
 <h2>新用户注册</h2>
-<form action="<%=request.getContextPath()%>/registeredSucceed.jsp" method="post">
+<form action="/doregist" method="post" align="center">
     <table align="center">
         <tr>
             <td>请输入用户名:</td>
