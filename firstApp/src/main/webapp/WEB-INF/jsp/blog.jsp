@@ -17,16 +17,26 @@
     <table align="center">
         <tr>
             <td><input type="button" value="写博客" onclick="window.location.href='newBlog'" color="blue"/></td>
-            <td><input type="button" value="加好友" /></td>
         </tr>
     </table>
     <br />
-    <p>我写过的博客</p>
-    <c:forEach items="${map}" var="blog">
-        <c:out value="${blog.value}"></c:out>
-        <c:url value="${blog.key}"></c:url>
-        <br/>
-    </c:forEach>
 </form>
+<p>我写过的博客</p>
+<c:forEach items="${map}" var="blog">
+    <a href="editBlog?bid=${blog.key}" name="${blog.key}">
+        <c:out value="${blog.value}"></c:out>
+    </a>
+    <br/>
+</c:forEach>
+<br/>
+<br/>
+<br/>
+<p>推荐博客</p>
+<c:forEach items="${otherMap}" var="blog">
+    <a href="OtherBlog?uid=${blog.key}" name="${blog.key}">
+        <c:out value="${blog.value}"></c:out>
+    </a>
+    <br/>
+</c:forEach>
 </body>
 </html>

@@ -22,4 +22,10 @@ public class UserService implements  UserMapper{
     public void Regist(String name){
         userMapper.Regist(name);
     }
+
+    @Override
+    public User SelUser(int id){return userMapper.SelUser(id);}
+
+    @Override
+    public void InsFriend(User user) {userMapper.InsFriend(user);}
 }

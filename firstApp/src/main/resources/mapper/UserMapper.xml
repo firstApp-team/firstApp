@@ -22,4 +22,14 @@
     <insert id="Regist">
         insert into test.t_user(name) value (#{name});
     </insert>
+
+    <select id="SelUser"
+            resultType="com.springboot.model.User"> <!-- 创建对应user实体类的位置 -->
+        select * from test.t_user where id=#{id};
+    </select>
+
+    <!--加好友-->
+    <insert id="InsFriend" parameterType="com.springboot.model.User">
+        insert into test.t_firends value (#{id},#{fid},1)
+    </insert>
 </mapper>

@@ -21,4 +21,15 @@ public class BlogService implements BlogMapper{
     public void InsBlog(Blog blog){
         blogMapper.InsBlog(blog);
     }
+
+    @Override
+    public Blog ShowBlog(int bid){
+        return blogMapper.ShowBlog(bid);
+    }
+
+    @Override
+    public void EditBlog(Blog blog){blogMapper.EditBlog(blog);}
+
+    @Override
+    public List<Blog> SelOtherBlog(int id){return blogMapper.SelOtherBlog(id);}
 }

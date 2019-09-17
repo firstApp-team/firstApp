@@ -13,4 +13,10 @@ public interface UserMapper{
 
 //    注册
     void Regist(String name);
+
+    //根据uid查询用户
+    User SelUser(int id);
+
+    //加好友
+    void InsFriend(User user);
 }

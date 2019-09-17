@@ -15,13 +15,29 @@
         <result column="bname" jdbcType="VARCHAR" property="bname" />
         <result column="text" jdbcType="VARCHAR" property="text" />
     </resultMap>
-    <!-- 根据_key查询得到一个user对象-->
+    <!-- 根据uid查询得到一个uid下的所有博客-->
     <select id="SelBlog"
             resultMap="BlogList"> <!-- 创建对应user实体类的位置 -->
         select * from test.t_blog where id=#{id};
     </select>
 
+    <!-- 根据bid查询得到一个博客的内容-->
+    <select id="ShowBlog"
+            resultType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
+        select * from test.t_blog where bid=#{bid};
+    </select>
+
     <insert id="InsBlog" parameterType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
         insert into test.t_blog(id,bname,text) values(#{id},#{bname},#{text});
     </insert>
+
+    <!--根据bid更新博客-->
+    <update id="EditBlog" parameterType="com.springboot.model.Blog">
+        update test.t_blog set bname=#{bname},text=#{text} where bid=#{bid}
+    </update>
+
+    <!--根据uid查询不属于本人的博客-->
+    <select id="SelOtherBlog" resultMap="BlogList">
+        select * from t_blog where id!=#{id} limit 10
+    </select>
 </mapper>

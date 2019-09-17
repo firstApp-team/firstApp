@@ -6,11 +6,22 @@ package com.springboot.model;
 public class User {
 
     private int id;
+
+    public int getFid() {
+        return fid;
+    }
+
+    public void setFid(int fid) {
+        this.fid = fid;
+    }
+
+    private int fid;
     private String name;
 
-    public User(int Id,String name){
+    public User(int Id,int fid,String name){
         super();
         this.id = Id;
+        this.fid = fid;
         this.name = name;
     }
 
