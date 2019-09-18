@@ -13,7 +13,7 @@
 <body>
 <h2 align="center"><font color="red" />新博客</h2>
 <form action="/donewBlog" method="post">
-    ${user }<br/>
+<br/>
         <br/>
     <table align="center">
         <tr>
@@ -24,12 +24,8 @@
             <td>文章：</td>
             <td><input type="text" name="text"></td>
         </tr>
-        <tr>
-            <td>${user.id}</td>
-            <td>${user.name}</td>
-        </tr>
     </table>
-        <input type="submit" name=register value="提交">
+        <input type="submit" name="register" value="提交">
 </form>
 </body>
 </html>

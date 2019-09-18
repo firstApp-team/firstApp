@@ -33,10 +33,10 @@
 <br/>
 <p>推荐博客</p>
 <c:forEach items="${otherMap}" var="blog">
-    <a href="OtherBlog?uid=${blog.key}" name="${blog.key}">
+    <a href="OtherBlog?bid=${blog.key}" name="${blog.key}">
         <c:out value="${blog.value}"></c:out>
     </a>
-    <br/>
+    <br />
 </c:forEach>
 </body>
 </html>

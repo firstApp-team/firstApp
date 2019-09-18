@@ -21,4 +21,7 @@ public interface BlogMapper {
 
     //修改博客
     void EditBlog(Blog blog);
+
+    //插入评论
+    void InsRemark(Blog blog);
 }

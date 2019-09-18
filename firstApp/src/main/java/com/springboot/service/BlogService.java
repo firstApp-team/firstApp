@@ -32,4 +32,7 @@ public class BlogService implements BlogMapper{
 
     @Override
     public List<Blog> SelOtherBlog(int id){return blogMapper.SelOtherBlog(id);}
+
+    @Override
+    public void InsRemark(Blog blog){blogMapper.InsRemark(blog);}
 }

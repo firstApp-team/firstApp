@@ -28,7 +28,7 @@
     </select>
 
     <insert id="InsBlog" parameterType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
-        insert into test.t_blog(id,bname,text) values(#{id},#{bname},#{text});
+        insert into test.t_blog(id,bname,text,status) values(#{id},#{bname},#{text},1);
     </insert>
 
     <!--根据bid更新博客-->
@@ -40,4 +40,9 @@
     <select id="SelOtherBlog" resultMap="BlogList">
         select * from t_blog where id!=#{id} limit 10
     </select>
+
+    <!--插入评论-->
+    <insert id="InsRemark" parameterType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
+        insert into test.t_remark(bid,id,text,status) values(#{bid},#{id},#{text},1);
+    </insert>
 </mapper>

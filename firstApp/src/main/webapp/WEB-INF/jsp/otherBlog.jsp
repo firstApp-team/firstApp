@@ -15,12 +15,23 @@
 <h2 align="center"><font color="red" />${user.name}</h2>
 <table align="center">
     <tr>
-
-    </tr>
-    <tr>
         <td><button type="submit" value="${user.id}" color="blue" name="id">加好友</button></td>
     </tr>
+    <tr>
+        <td>${blog.text}</td>
+    </tr>
 </table>
+</form>
+<form action="/doremark" method="post">
+    <table align="center">
+        <tr>
+            <td  align="center">
+                <input type="text" name="remark" />
+                <br/>
+                <input type="submit" value="提交" />
+            </td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>

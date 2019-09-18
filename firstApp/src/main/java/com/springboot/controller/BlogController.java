@@ -39,9 +39,10 @@ public class BlogController {
         for(Blog b:blog){
             map.put(b.getBid(), b.getBname());
         }
-        Map otherMap = new HashMap();
+       // Map tempMap = new HashMap<Integer,String>();
+        Map otherMap = new HashMap<Integer,String>();
         for(Blog b:otherBlog){
-            otherMap.put(b.getUid(),b.getBname());
+            otherMap.put(b.getBid(),b.getBname());
         }
         mv.addObject("map",map);
         mv.addObject("otherMap",otherMap);
@@ -78,10 +79,12 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/OtherBlog")
-    public ModelAndView ShowOtherBlog(int uid){
+    public ModelAndView ShowOtherBlog(int bid){
         mv.setViewName("otherBlog");
-        Map map = new HashMap();
-        User user = userService.SelUser(uid);
+        gn_bid = bid;
+        Blog blog = blogService.ShowBlog(bid);
+        mv.addObject("blog",blog);
+        User user = userService.SelUser(blog.getUid());
         mv.addObject("user",user);
         return mv;
     }
@@ -90,6 +93,16 @@ public class BlogController {
     public String doFriend(int id){
         user1.setFid(id);
         userService.InsFriend(user1);
+        return "success";
+    }
+
+    @RequestMapping("/doremark")
+    public String doRemark(String remark){
+        Blog blog = new Blog();
+        blog.setBid(gn_bid);
+        blog.setUid(user1.getId());
+        blog.setText(remark);
+        blogService.InsRemark(blog);
         return "success";
     }
 }
