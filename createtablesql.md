@@ -24,6 +24,7 @@ constraint fk_blog_uid foreign key (id) references t_user(id)
 engine=Innodb default charset=utf8;
 
 create table if not exists t_remark(
+rid int comment '评论id' primary key auto_increment,
 bid int comment '博客id',
 id int comment '评论人id',
 text varchar(4000) comment '评论内容',
