@@ -15,6 +15,15 @@ public class Blog {
 
     String bname;
 
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
+    }
+
+    int rid;
     public Blog(int bid,int id,String text,String bname){
         super();
         this.bid = bid;

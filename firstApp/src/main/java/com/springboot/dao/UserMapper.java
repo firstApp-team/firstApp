@@ -19,4 +19,10 @@ public interface UserMapper{
 
     //加好友
     void InsFriend(User user);
+
+    //查询好友
+    int SelFriend(User user);
+
+    //删除好友
+    void DelFriend(User user);
 }

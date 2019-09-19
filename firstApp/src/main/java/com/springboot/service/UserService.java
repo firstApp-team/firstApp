@@ -28,4 +28,10 @@ public class UserService implements  UserMapper{
 
     @Override
     public void InsFriend(User user) {userMapper.InsFriend(user);}
+
+    @Override
+    public int SelFriend(User user) {return userMapper.SelFriend(user);}
+
+    @Override
+    public void DelFriend(User user) {userMapper.DelFriend(user);}
 }

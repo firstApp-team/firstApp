@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -84,8 +85,24 @@ public class BlogController {
         gn_bid = bid;
         Blog blog = blogService.ShowBlog(bid);
         mv.addObject("blog",blog);
-        User user = userService.SelUser(blog.getUid());
-        mv.addObject("user",user);
+        User fuser = userService.SelUser(blog.getUid());
+        mv.addObject("user",fuser);
+
+
+        User user = new User();
+        user.setFid(blog.getUid());
+        user.setId(user1.getId());
+        int cnt = userService.SelFriend(user);
+        mv.addObject("flag",cnt);
+        Map map = new LinkedHashMap();
+        List<Blog> remark = blogService.SelRemark(bid);
+        for(Blog b:remark){
+            User u = userService.SelUser(b.getUid());
+            //暂时处理不了同一个人评论同一个博客，又不想创建新的对象
+            map.put(b.getRid()+"楼："+u.getName(),b.getText());
+        }
+
+        mv.addObject("map",map);
         return mv;
     }
 
@@ -93,6 +110,13 @@ public class BlogController {
     public String doFriend(int id){
         user1.setFid(id);
         userService.InsFriend(user1);
+        return "success";
+    }
+
+    @RequestMapping(value = "/dodelfirend")
+    public String doDelFriend(int id){
+        user1.setFid(id);
+        userService.DelFriend(user1);
         return "success";
     }
 

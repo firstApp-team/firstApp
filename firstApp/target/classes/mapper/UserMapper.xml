@@ -32,4 +32,14 @@
     <insert id="InsFriend" parameterType="com.springboot.model.User">
         insert into test.t_firends value (#{id},#{fid},1)
     </insert>
+
+    <!--查找好友-->
+    <select id="SelFriend" resultType="Integer" parameterType="com.springboot.model.User">
+        select count(1) from test.t_firends where id=#{id} and fid=#{fid} and status = 1
+    </select>
+
+    <!--删除好友-->
+    <delete id="DelFriend" parameterType="com.springboot.model.User">
+        delete from test.t_firends where id=#{id} and fid=#{fid}
+    </delete>
 </mapper>

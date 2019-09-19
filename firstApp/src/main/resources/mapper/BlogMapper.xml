@@ -45,4 +45,9 @@
     <insert id="InsRemark" parameterType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
         insert into test.t_remark(bid,id,text,status) values(#{bid},#{id},#{text},1);
     </insert>
+
+    <!--查找评论-->
+    <select id="SelRemark" resultMap="BlogList"> <!-- 创建对应user实体类的位置 -->
+        select * from test.t_remark where bid= #{bid} and status = 1 order by rid
+    </select>
 </mapper>

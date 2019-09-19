@@ -35,4 +35,7 @@ public class BlogService implements BlogMapper{
 
     @Override
     public void InsRemark(Blog blog){blogMapper.InsRemark(blog);}
+
+    @Override
+    public List<Blog> SelRemark(int bid) {return blogMapper.SelRemark(bid);}
 }

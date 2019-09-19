@@ -24,4 +24,7 @@ public interface BlogMapper {
 
     //插入评论
     void InsRemark(Blog blog);
+
+    //查找评论
+    List<Blog> SelRemark(int bid);
 }
