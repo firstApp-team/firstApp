@@ -12,7 +12,7 @@
 </head>
 <body>
 <h2 align="center"><font color="red" />修改博客</h2>
-<form action="/doeditBlog" method="post">
+
 <br/>
     <br/>
     <table align="center">
@@ -24,8 +24,19 @@
             <td>文章：</td>
             <td><input type="text" name="text" value="${blog.text}"></td>
         </tr>
+        <tr>
+            <td>
+                <form action="/doeditBlog" method="post">
+                    <input type="submit" name="register" value="提交">
+                </form>
+            </td>
+            <td>
+                <form action="/delBlog" method="post">
+                    <input type="submit" name="delete" value="删除">
+                </form>
+            </td>
+        </tr>
+
     </table>
-    <input type="submit" name=register value="提交">
-</form>
 </body>
 </html>

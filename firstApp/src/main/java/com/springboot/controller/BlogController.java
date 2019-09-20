@@ -79,6 +79,13 @@ public class BlogController {
         return "success";
     }
 
+    @RequestMapping(value = "/delBlog")
+    public String DelBlog(){
+        //调用删除博客
+        blogService.DelBlog(gn_bid);
+        return "success";
+    }
+
     @RequestMapping(value = "/OtherBlog")
     public ModelAndView ShowOtherBlog(int bid){
         mv.setViewName("otherBlog");

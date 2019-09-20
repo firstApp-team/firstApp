@@ -18,7 +18,7 @@
     <!-- 根据uid查询得到一个uid下的所有博客-->
     <select id="SelBlog"
             resultMap="BlogList"> <!-- 创建对应user实体类的位置 -->
-        select * from test.t_blog where id=#{id};
+        select * from test.t_blog where id=#{id} and status =1;
     </select>
 
     <!-- 根据bid查询得到一个博客的内容-->
@@ -50,4 +50,8 @@
     <select id="SelRemark" resultMap="BlogList"> <!-- 创建对应user实体类的位置 -->
         select * from test.t_remark where bid= #{bid} and status = 1 order by rid
     </select>
+
+    <update id="DelBlog" parameterType="Integer">
+        update test.t_blog set status = 0 where bid=#{bid}
+    </update>
 </mapper>

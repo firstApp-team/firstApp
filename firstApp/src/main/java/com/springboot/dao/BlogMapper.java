@@ -27,4 +27,7 @@ public interface BlogMapper {
 
     //查找评论
     List<Blog> SelRemark(int bid);
+
+    //删除博客
+    void DelBlog(int bid);
 }
