@@ -1,6 +1,7 @@
 create table if not exists t_user(
 id int comment '用户id' primary key auto_increment,
-name varchar(100) comment '用户昵称'
+name varchar(100) comment '用户昵称',
+password varchar2(40) comment '密码'
 )
 engine=Innodb default charset=utf8;
 
