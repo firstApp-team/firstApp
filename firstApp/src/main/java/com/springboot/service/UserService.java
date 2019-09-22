@@ -14,13 +14,13 @@ public class UserService implements  UserMapper{
     UserMapper userMapper;
 
     @Override
-    public User Sel(String name){
-        return userMapper.Sel(name);
+    public User Sel(User user){
+        return userMapper.Sel(user);
     }
 
     @Override
-    public void Regist(String name){
-        userMapper.Regist(name);
+    public void Regist(User user){
+        userMapper.Regist(user);
     }
 
     @Override
@@ -34,4 +34,7 @@ public class UserService implements  UserMapper{
 
     @Override
     public void DelFriend(User user) {userMapper.DelFriend(user);}
+
+    @Override
+    public int SelUsername(String username) {return userMapper.SelUsername(username);}
 }

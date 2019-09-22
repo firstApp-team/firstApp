@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-Success
+${msg}
+<script> window.setInterval("location='${ie}'",1000); </script>
 </body>
 </html>

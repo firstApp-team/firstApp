@@ -13,27 +13,6 @@
 </head>
 <body>
 <%@ include file="common.jsp"%>
-<c:if test="${!empty username}">
-<h2 align="center"><font color="red" />我的博客</h2>
-<form action="/getBlog" method="post">
-    <table align="center">
-        <tr>
-            <td><input type="button" value="写博客" onclick="window.location.href='newBlog'" color="blue"/></td>
-        </tr>
-    </table>
-    <br />
-</form>
-<p>我写过的博客</p>
-<c:forEach items="${blog}" var="b">
-    <a href="editBlog?bid=${b.bid}">
-        <c:out value="${b.bname}"></c:out>
-    </a>
-    <br/>
-</c:forEach>
-</c:if>
-<br/>
-<br/>
-<br/>
 <p>推荐博客</p>
 <c:forEach items="${recommendblog}" var="rb">
     <a href="OtherBlog?bid=${rb.bid}" >
@@ -41,6 +20,5 @@
     </a>
     <br />
 </c:forEach>
-
 </body>
 </html>

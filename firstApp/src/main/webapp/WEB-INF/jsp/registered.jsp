@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: duyuqiang
@@ -24,7 +25,7 @@
         </tr>
         <tr align="right">
             <td>请输入确认密码:</td>
-            <td><input type="text" name=password></td>
+            <td><input type="text" name=querypassword></td>
         </tr>
     </table>
     <input type="submit" name=register value="注册">

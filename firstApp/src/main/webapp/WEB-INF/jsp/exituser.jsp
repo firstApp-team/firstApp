@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: apple
-  Date: 2019-09-13
-  Time: 09:21
+  User: duyuqiang
+  Date: 2019/9/22
+  Time: 19:55
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-${msg}
+<!--%session.invalidate();%-->
 <script> window.setInterval("location='${ie}'",1000); </script>
 </body>
 </html>

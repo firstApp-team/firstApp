@@ -14,8 +14,8 @@ public class BlogService implements BlogMapper{
 
     //查找博客
     @Override
-    public List<Blog> SelBlog(int id){
-        return blogMapper.SelBlog(id);
+    public List<Blog> SelBlog(int userid){
+        return blogMapper.SelBlog(userid);
     }
 
     //插入新博客
@@ -26,8 +26,8 @@ public class BlogService implements BlogMapper{
 
     //显示博客
     @Override
-    public Blog ShowBlog(int bid){
-        return blogMapper.ShowBlog(bid);
+    public Blog ShowBlog(int blogid){
+        return blogMapper.ShowBlog(blogid);
     }
 
     //修改博客
@@ -36,7 +36,7 @@ public class BlogService implements BlogMapper{
 
     //推荐别人的博客
     @Override
-    public List<Blog> SelOtherBlog(int id){return blogMapper.SelOtherBlog(id);}
+    public List<Blog> SelOtherBlog(int userid){return blogMapper.SelOtherBlog(userid);}
 
     //插入评论
     @Override
@@ -44,9 +44,17 @@ public class BlogService implements BlogMapper{
 
     //查找评论
     @Override
-    public List<Blog> SelRemark(int bid) {return blogMapper.SelRemark(bid);}
+    public List<Blog> SelRemark(Blog blog) {return blogMapper.SelRemark(blog);}
 
     //删除博客
     @Override
-    public void DelBlog(int bid){blogMapper.DelBlog(bid);}
+    public void DelBlog(int blogid){blogMapper.DelBlog(blogid);}
+
+    //推荐博客
+    @Override
+    public List<Blog> SelrecommendBlog(){return blogMapper.SelrecommendBlog();}
+
+    //删除评论
+    @Override
+    public void Delremark(int rid){blogMapper.Delremark(rid);}
 }

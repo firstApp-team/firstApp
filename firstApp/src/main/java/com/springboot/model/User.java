@@ -6,6 +6,7 @@ package com.springboot.model;
 public class User {
 
     private int id;
+    private String password;
 
     public int getFid() {
         return fid;
@@ -43,6 +44,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

@@ -11,11 +11,15 @@
     <title>修改博客</title>
 </head>
 <body>
+<%@ include file="common.jsp"%>
 <h2 align="center"><font color="red" />修改博客</h2>
-
-<br/>
+<form action="/doeditBlog" method="post">
+    <br/>
     <br/>
     <table align="center">
+        <tr>
+            <td><input type="hidden" name="bid" value="${blog.bid}" /></td>
+        </tr>
         <tr>
             <td>标题：</td>
             <td><input type="text" name="bname" value="${blog.bname}"/></td>
@@ -26,17 +30,13 @@
         </tr>
         <tr>
             <td>
-                <form action="/doeditBlog" method="post">
-                    <input type="submit" name="register" value="提交">
-                </form>
+                <button type="submit" name="flag" value="1" />提交
             </td>
             <td>
-                <form action="/delBlog" method="post">
-                    <input type="submit" name="delete" value="删除">
-                </form>
+                <button type="submit" name="flag" value="2" />删除
             </td>
         </tr>
-
     </table>
+</form>
 </body>
 </html>

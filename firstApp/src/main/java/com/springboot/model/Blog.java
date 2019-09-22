@@ -4,6 +4,31 @@ public class Blog {
     int bid;
     int id;
     String text;
+    int rank;
+    String bname;
+    int rid;
+    //判断登陆人与评论人是否一致
+    int remark_status;
+
+    public Blog(){
+        super();
+    }
+
+    public Blog(int bid,int id,String text,String bname){
+        super();
+        this.bid = bid;
+        this.id = id;
+        this.text = text;
+        this.bname = bname;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
 
     public String getBname() {
         return bname;
@@ -13,8 +38,6 @@ public class Blog {
         this.bname = bname;
     }
 
-    String bname;
-
     public int getRid() {
         return rid;
     }
@@ -22,20 +45,6 @@ public class Blog {
     public void setRid(int rid) {
         this.rid = rid;
     }
-
-    int rid;
-    public Blog(int bid,int id,String text,String bname){
-        super();
-        this.bid = bid;
-        this.id = id;
-        this.text = text;
-        this.bname = bname;
-    }
-
-    public Blog(){
-        super();
-    }
-
 
     public int getBid() {
         return bid;
@@ -61,5 +70,11 @@ public class Blog {
         this.text = text;
     }
 
+    public int getRemark_status() {
+        return remark_status;
+    }
 
+    public void setRemark_status(int remark_status) {
+        this.remark_status = remark_status;
+    }
 }

@@ -9,10 +9,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper{
 //    查询
-    User Sel(String name);
+    User Sel(User user);
+
+    //查询是否存在同名用户
+    int SelUsername(String username);
 
 //    注册
-    void Regist(String name);
+    void Regist(User user);
 
     //根据uid查询用户
     User SelUser(int id);

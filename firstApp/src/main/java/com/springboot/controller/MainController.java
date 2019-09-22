@@ -2,6 +2,7 @@ package com.springboot.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by duyuqiang on 2019/9/4.
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainController {
     @RequestMapping(value="/")
-    String home(){
-        return "Hello world";
+    public ModelAndView home(){
+        ModelAndView mv = new ModelAndView("redirect:/showallblog");
+//        mv.setViewName("showallblog");
+        return mv;
     }
 }

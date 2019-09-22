@@ -13,14 +13,20 @@
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
     </resultMap>
+
+    <!--判断用户名是否存在-->
+    <select id="SelUsername" resultType="Integer">
+        select count(1) from test.t_user where name = #{name}
+    </select>
+
     <!-- 根据_key查询得到一个user对象-->
-    <select id="Sel"
+    <select id="Sel" parameterType="com.springboot.model.User"
             resultType="com.springboot.model.User"> <!-- 创建对应user实体类的位置 -->
-        select * from test.t_user where name=#{name};
+        select * from test.t_user where name=#{name} and password = #{password};
     </select>
 
     <insert id="Regist">
-        insert into test.t_user(name) value (#{name});
+        insert into test.t_user(name,password) value (#{name},#{password});
     </insert>
 
     <select id="SelUser"
