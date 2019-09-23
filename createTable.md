@@ -34,7 +34,7 @@
 |rid|int|评论id,主键,自增|
 |bid|int|博客id|
 |id|int|评论人id|
-|text|varchar2|评论内容|
+|text|varchar|评论内容|
 |status|int|评论状态(0-删除1-使用|
 |update_time|date|更新时间|
 外键：bid，id
