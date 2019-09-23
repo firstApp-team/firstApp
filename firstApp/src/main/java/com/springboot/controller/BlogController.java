@@ -45,7 +45,7 @@ public class BlogController {
     public ModelAndView getBlog(HttpSession session){
         List<Blog> Recommend_blog = null;
         //TODO 使用驼峰命名法,大量方法和变量存在本问题,自行检查,也包括Mapper和Service中的,同时方法命名需要调整,取消简写,如selBlog改为selectBlog,尽可能的让方法名可以说明方法功能
-        //TODO 接上条 在UserService中
+        //TODO 接上条 在UserService中直接使用sel作为查询,在BlogService中改成了SelBlog ,不够统一,推荐使用第一种方法
         if(session.getAttribute("username") == null){
             Recommend_blog = blogService.SelrecommendBlog();
         }else{
