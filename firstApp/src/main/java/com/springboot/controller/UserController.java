@@ -14,6 +14,8 @@ import java.util.Map;
 /**
  * Created by duyuqiang on 2019/9/5.
  */
+//TODO 清理无用注释
+    //TODO 使用域概念命名连接地址 例如 添加好友地址为/friend/add 添加好友页面地址为/friend/add.html
 @Controller
 public class UserController {
     @Autowired
@@ -29,7 +31,7 @@ public class UserController {
     @RequestMapping(value="/dologin")
     public ModelAndView doLogin(User user,HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-
+        //TODO 校验后的提示信息直接显示在登陆页面中,不要跳转.
         /**
          * 进行用户密码校验
          */
@@ -52,6 +54,7 @@ public class UserController {
             mv.addObject("ie","login");
             return mv;
         }
+        //TODO 增加密码校验
         //将登录人信息封装在request中
         request.getSession().setAttribute("username",reg_user.getName());
         request.getSession().setAttribute("userid",reg_user.getId());
@@ -89,6 +92,7 @@ public class UserController {
             return mv;
         }
         //判断是否存在同名用户
+        //TODO 本功能需调整为前台ajax动态检查
         int flag = userService.SelUsername(user.getName());
         if(flag != 0){
             mv.setViewName("err");

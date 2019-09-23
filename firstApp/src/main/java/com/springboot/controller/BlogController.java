@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
+//TODO 清理无用注释
 @Controller
 public class BlogController {
     @Autowired
@@ -44,6 +44,8 @@ public class BlogController {
     @RequestMapping(value = "/blog")
     public ModelAndView getBlog(HttpSession session){
         List<Blog> Recommend_blog = null;
+        //TODO 使用驼峰命名法,大量方法和变量存在本问题,自行检查,也包括Mapper和Service中的,同时方法命名需要调整,取消简写,如selBlog改为selectBlog,尽可能的让方法名可以说明方法功能
+        //TODO 接上条 在UserService中
         if(session.getAttribute("username") == null){
             Recommend_blog = blogService.SelrecommendBlog();
         }else{
@@ -105,7 +107,7 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/editBlog")
-    public ModelAndView ShowBlog(Blog blog,HttpSession session){
+    public ModelAndView ShowBlog(Blog blog,HttpSession session){//TODO 使用驼峰命名法
         String username = session.getAttribute("username").toString();
         mv.setViewName("editBlog");
         //获取博客的信息

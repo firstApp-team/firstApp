@@ -40,7 +40,7 @@ public class BlogService implements BlogMapper{
 
     //插入评论
     @Override
-    public void InsRemark(Blog blog){blogMapper.InsRemark(blog);}
+    public void InsRemark(Blog blog){blogMapper.InsRemark(blog);}//TODO 评论的常用英文是comment
 
     //查找评论
     @Override

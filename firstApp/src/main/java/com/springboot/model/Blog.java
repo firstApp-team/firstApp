@@ -1,5 +1,5 @@
 package com.springboot.model;
-
+//TODO id字段表意不清楚,所有主键都改为UUID类型
 public class Blog {
     int bid;
     int id;
