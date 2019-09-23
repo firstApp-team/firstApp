@@ -15,7 +15,7 @@
 <table style="width:100%">
     <tr>
         <td align="left">
-            <input type="button" value="主页" onclick="window.location.href='showallblog'"/>
+            <input type="button" value="主页" onclick="window.location.href='blog'"/>
         </td>
         <td align="right">
             <c:if test="${!empty username}">

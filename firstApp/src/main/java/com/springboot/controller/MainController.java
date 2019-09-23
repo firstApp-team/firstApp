@@ -11,8 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
     @RequestMapping(value="/")
     public ModelAndView home(){
-        ModelAndView mv = new ModelAndView("redirect:/showallblog");
+//        ModelAndView mv = new ModelAndView("redirect:/showallblog");
 //        mv.setViewName("showallblog");
+        ModelAndView mv = new ModelAndView("redirect:/blog");
         return mv;
     }
 }

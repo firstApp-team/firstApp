@@ -21,12 +21,28 @@ public class BlogController {
     BlogService blogService;
     @Autowired
     UserService userService;
-    User user1;
-    int gn_bid;
     ModelAndView mv = new ModelAndView();
 
-    @RequestMapping("/showallblog")
-    public ModelAndView getAllBlog(HttpSession session){
+//    @RequestMapping("/showallblog")
+//    public ModelAndView getAllBlog(HttpSession session){
+//        List<Blog> Recommend_blog = null;
+//            if(session.getAttribute("username") == null){
+//                Recommend_blog = blogService.SelrecommendBlog();
+//        }else{
+//            //获取登录用户ID
+//            Object uid = session.getAttribute("userid");
+//            int userid = Integer.parseInt(uid.toString());
+//            //获取非登陆人的博客信息
+//            Recommend_blog = blogService.SelOtherBlog(userid);
+//        }
+//        mv.setViewName("showallblog");
+//
+//        mv.addObject("recommendblog",Recommend_blog);
+//        return mv;
+//    }
+
+    @RequestMapping(value = "/blog")
+    public ModelAndView getBlog(HttpSession session){
         List<Blog> Recommend_blog = null;
         if(session.getAttribute("username") == null){
             Recommend_blog = blogService.SelrecommendBlog();
@@ -36,35 +52,37 @@ public class BlogController {
             int userid = Integer.parseInt(uid.toString());
             //获取非登陆人的博客信息
             Recommend_blog = blogService.SelOtherBlog(userid);
+            //获取登录人的博客信息
+            List<Blog> blog = blogService.SelBlog(userid);
+            mv.addObject("blog",blog);
         }
-        mv.setViewName("showallblog");
-
+        mv.setViewName("blog");
         mv.addObject("recommendblog",Recommend_blog);
         return mv;
     }
 
-    @RequestMapping(value = "/blog")
-    public ModelAndView getBlog(HttpSession session){
-        //获取登录用户ID
-        Object uid = session.getAttribute("userid");
-        //获得推荐blog
-        List<Blog> Recommend_blog = blogService.SelrecommendBlog();
-
-        //如果是登录状态
-       if(uid!=null){
-           int userid = Integer.parseInt(uid.toString());
-           mv.setViewName("blog");
-           //获取登录人的博客信息
-           List<Blog> blog = blogService.SelBlog(userid);
-           mv.addObject("blog",blog);
-
-           //获取非登陆人的博客信息
-           Recommend_blog = blogService.SelOtherBlog(userid);
-       }
-
-        mv.addObject("recommendblog",Recommend_blog);
-        return mv;
-    }
+//    @RequestMapping(value = "/blog")
+//    public ModelAndView getBlog(HttpSession session){
+//        //获取登录用户ID
+//        Object uid = session.getAttribute("userid");
+//        //获得推荐blog
+//        List<Blog> Recommend_blog = blogService.SelrecommendBlog();
+//
+//        //如果是登录状态
+//       if(uid!=null){
+//           int userid = Integer.parseInt(uid.toString());
+//           mv.setViewName("blog");
+//           //获取登录人的博客信息
+//           List<Blog> blog = blogService.SelBlog(userid);
+//           mv.addObject("blog",blog);
+//
+//           //获取非登陆人的博客信息
+//           Recommend_blog = blogService.SelOtherBlog(userid);
+//       }
+//
+//        mv.addObject("recommendblog",Recommend_blog);
+//        return mv;
+//    }
 
     @RequestMapping(value = "/newBlog")
     public ModelAndView InsBlog(){
@@ -221,7 +239,7 @@ public class BlogController {
             session.invalidate();
         }
         mv.setViewName("exituser");
-        mv.addObject("ie","showallblog");
+        mv.addObject("ie","blog");
         return mv;
     }
 }
