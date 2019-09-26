@@ -15,16 +15,16 @@
 <table style="width:100%">
     <tr>
         <td align="left">
-            <input type="button" value="主页" onclick="window.location.href='blog'"/>
+            <input type="button" value="主页" onclick="window.location.href='/blog/show'"/>
         </td>
         <td align="right">
-            <c:if test="${!empty username}">
-                <form action="doexit">
+            <c:if test="${!empty userName}">
+                <form action="/doexit">
                     <input type="submit" value="退出"/>
                 </form>
             </c:if>
-            <c:if test="${empty username}">
-                <input type="button" value="登录" onclick="window.location.href='login'"/>
+            <c:if test="${empty userName}">
+                <input type="button" value="登录" onclick="window.location.href='/login'"/>
             </c:if>
         </td>
     </tr>

@@ -5,9 +5,13 @@ import com.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,144 +19,149 @@ import java.util.Map;
  * Created by duyuqiang on 2019/9/5.
  */
 //TODO 清理无用注释
-    //TODO 使用域概念命名连接地址 例如 添加好友地址为/friend/add 添加好友页面地址为/friend/add.html
+//TODO 使用域概念命名连接地址 例如 添加好友地址为/friend/add 添加好友页面地址为/friend/add.html
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
+    ModelAndView mv = new ModelAndView();
 
     @RequestMapping(value="/login")
     public ModelAndView getLoger(){
-        ModelAndView mv = new ModelAndView();
         mv.setViewName("login");
         return mv;
     }
 
     @RequestMapping(value="/dologin")
-    public ModelAndView doLogin(User user,HttpServletRequest request){
-        ModelAndView mv=new ModelAndView();
+    public ModelAndView doLogin(User user, HttpServletRequest request, HttpServletResponse response){
+        response.setContentType("text/html; charset=UTF-8"); //转码
         //TODO 校验后的提示信息直接显示在登陆页面中,不要跳转.
         /**
          * 进行用户密码校验
          */
         if(user.getName()==""){
-            mv.setViewName("err");
-            mv.addObject("msg","用户名不能为空");
-            mv.addObject("ie","login");
+            mv.setViewName("login");
+            try {
+                PrintWriter out = response.getWriter();
+                out.flush();
+                out.println("<script>");
+                out.println("alert('用户名不能为空，请输入！');");
+                out.println("history.back();");
+                out.println("</script>");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return mv;
         }else if(user.getPassword()==""){
-            mv.setViewName("err");
-            mv.addObject("msg","密码不能为空");
-            mv.addObject("ie","login");
+            mv.setViewName("login");
+            try {
+                PrintWriter out = response.getWriter();
+                out.flush();
+                out.println("<script>");
+                out.println("alert('密码不能为空，请输入！');");
+                out.println("history.back();");
+                out.println("</script>");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return mv;
         }
         //获取是否存在登陆人信息
-        User reg_user = userService.Sel(user);
+        User reg_user = userService.checkLoginUser(user);
         if(reg_user == null){
-            mv.setViewName("err");
-            mv.addObject("msg","该用户不存在");
-            mv.addObject("ie","login");
+            mv.setViewName("login");
+            try {
+                PrintWriter out = response.getWriter();
+                out.flush();
+                out.println("<script>");
+                out.println("alert('用户名或者密码错误，请重新输入！');");
+                out.println("history.back();");
+                out.println("</script>");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return mv;
         }
         //TODO 增加密码校验
         //将登录人信息封装在request中
-        request.getSession().setAttribute("username",reg_user.getName());
-        request.getSession().setAttribute("userid",reg_user.getId());
+        request.getSession().setAttribute("userName",reg_user.getName());
+        request.getSession().setAttribute("userId",reg_user.getId());
         //跳转到blog页面
-        mv.setViewName("redirect:/blog");
+        mv.setViewName("redirect:/blog/show");
         return mv;
     }
 
     @RequestMapping(value="/register")
     public ModelAndView getRegister(User user){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("registered");
+        mv.setViewName("register");
         return mv;
     }
 
     @RequestMapping("/doregist")
-    public ModelAndView doRegist(User user,String queryPassword){
-        ModelAndView mv = new ModelAndView();
-
+    public ModelAndView doRegist(User user,String queryPassword,HttpServletResponse response) throws IOException{
+        response.setContentType("text/html;charset=UTF-8");
+        //设置登录人ID
+        user.setId();
+        PrintWriter out = response.getWriter();
         //是否需要写个共有方法
         if(user.getName() == ""){//判断用户名是否为空
-            mv.setViewName("err");
-            mv.addObject("msg","用户名不能为空");
-            mv.addObject("ie","register");
+            mv.setViewName("register");
+            try {
+                out.flush();
+                out.print("<script>");
+                out.println("alert('用户名不能为空，请输入！');");
+                out.println("history.back();");
+                out.println("</script>");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return mv;
         }else if(user.getPassword()==""){ //判断密码是否为空
-            mv.setViewName("err");
-            mv.addObject("msg","密码不能为空");
-            mv.addObject("ie","register");
+            mv.setViewName("register");
+            try {
+                out.flush();
+                out.print("<script>");
+                out.println("alert('密码不能为空，请输入！');");
+                out.println("history.back();");
+                out.println("</script>");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return mv;
-        }else if(user.getPassword().equals(queryPassword)){ //判断密码是否一致
-            mv.setViewName("err");
-            mv.addObject("msg","密码与确认密码不一致");
-            mv.addObject("ie","register");
+        }else if(!(user.getPassword().equals(queryPassword))){ //判断密码是否一致
+            mv.setViewName("register");
+            try {
+                out.flush();
+                out.print("<script>");
+                out.println("alert('密码与确认密码不一致，请重新输入!');");
+                out.println("history.back();");
+                out.println("</script>");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return mv;
         }
         //判断是否存在同名用户
         //TODO 本功能需调整为前台ajax动态检查
-        int flag = userService.SelUsername(user.getName());
-        if(flag != 0){
-            mv.setViewName("err");
-            mv.addObject("msg","该用户名已存在");
-            mv.addObject("ie","register");
-            return mv;
-        }
+
         //插入用户信息
-        userService.Regist(user);
+        userService.registUser(user);
         mv.setViewName("success");
         mv.addObject("msg","注册成功");
         mv.addObject("ie","login");
         return mv;
     }
 
-//    @RequestMapping(value="/getUser", method = RequestMethod.POST)
-//    public ModelAndView GetUser(User user,Map<String,Object> map){
-//        User user1 = userService.Sel(user.getName());
-//
-//        ModelAndView mv = new ModelAndView();
-//
-//        if(user1==null) {
-//            mv.setViewName("err");
-//            mv.addObject("message","fail");
-//            return mv;
-//        }
-//        else{
-//            map.put("msg","登录成功");
-//        }
-//
-//        mv.setViewName("welcome");//返回文件名
-//
-//
-//        mv.addObject("message","hello kitty");
-//
-//        //类
-//        mv.addObject("user",user);
-//
-//        //List
-//        List<String> list = new ArrayList<String>();
-//        list.add("java");
-//        list.add("c++");
-//        list.add("oracle");
-//        mv.addObject("bookList",list);
-//
-//        //Map
-////        Map<String,String> map = new HashMap<String,String>();
-//        map.put("zhangsan","北京");
-//        map.put("lisi","上海");
-//        map.put("wangwu","深圳");
-//        mv.addObject("map",map);
-//
-//        return mv;
-//    }
-
-    @RequestMapping("/show")
-    public Map<String,String> getMap(){
-        Map<String,String> map = new HashMap<String, String>();
-        map.put("key1","value-1");
-        map.put("key2","value-2");
+    @RequestMapping(value = "/ajax")
+    @ResponseBody
+    public Map<String,String> ajax(String name){
+        Map map = new HashMap<String,String>();
+        int flag = userService.selectUserName(name);
+        if(flag != 0){
+            map.put("result","true");
+        }else {
+            map.put("result","false");
+        }
         return map;
     }
 }

@@ -10,42 +10,43 @@
     User类就是users表所对应的实体类
     -->
     <resultMap id="BaseResultMap" type="com.springboot.model.User">
-        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="id" jdbcType="VARCHAR" property="uid" />
         <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
     </resultMap>
 
     <!--判断用户名是否存在-->
-    <select id="SelUsername" resultType="Integer">
+    <select id="selectUserName" resultType="Integer">
         select count(1) from test.t_user where name = #{name}
     </select>
 
     <!-- 根据_key查询得到一个user对象-->
-    <select id="Sel" parameterType="com.springboot.model.User"
+    <select id="checkLoginUser" parameterType="com.springboot.model.User"
             resultType="com.springboot.model.User"> <!-- 创建对应user实体类的位置 -->
         select * from test.t_user where name=#{name} and password = #{password};
     </select>
 
-    <insert id="Regist">
-        insert into test.t_user(name,password) value (#{name},#{password});
+    <insert id="registUser">
+        insert into test.t_user(id,name,password) value (#{uid},#{name},#{password});
     </insert>
 
-    <select id="SelUser"
+    <select id="selectUser"
             resultType="com.springboot.model.User"> <!-- 创建对应user实体类的位置 -->
-        select * from test.t_user where id=#{id};
+        select * from test.t_user where id=#{uid};
     </select>
 
     <!--加好友-->
-    <insert id="InsFriend" parameterType="com.springboot.model.User">
-        insert into test.t_firends value (#{id},#{fid},1)
+    <insert id="insertFriend" parameterType="com.springboot.model.User">
+        insert into test.t_friend value (#{uid},#{fid},1)
     </insert>
 
     <!--查找好友-->
-    <select id="SelFriend" resultType="Integer" parameterType="com.springboot.model.User">
-        select count(1) from test.t_firends where id=#{id} and fid=#{fid} and status = 1
+    <select id="selectFriend" resultType="Integer" parameterType="com.springboot.model.User">
+        select count(1) from test.t_friend where uid=#{uid} and fid=#{fid} and status = 1
     </select>
 
     <!--删除好友-->
-    <delete id="DelFriend" parameterType="com.springboot.model.User">
-        delete from test.t_firends where id=#{id} and fid=#{fid}
+    <delete id="deleteFriend" parameterType="com.springboot.model.User">
+        delete from test.t_friend where uid=#{uid} and fid=#{fid}
     </delete>
 </mapper>

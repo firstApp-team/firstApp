@@ -14,27 +14,27 @@ public class UserService implements  UserMapper{
     UserMapper userMapper;
 
     @Override
-    public User Sel(User user){
-        return userMapper.Sel(user);
+    public User checkLoginUser(User user){
+        return userMapper.checkLoginUser(user);
     }
 
     @Override
-    public void Regist(User user){
-        userMapper.Regist(user);
+    public void registUser(User user){
+        userMapper.registUser(user);
     }
 
     @Override
-    public User SelUser(int id){return userMapper.SelUser(id);}
+    public User selectUser(String userId){return userMapper.selectUser(userId);}
 
     @Override
-    public void InsFriend(User user) {userMapper.InsFriend(user);}
+    public void insertFriend(User user) {userMapper.insertFriend(user);}
 
     @Override
-    public int SelFriend(User user) {return userMapper.SelFriend(user);}
+    public int selectFriend(User user) {return userMapper.selectFriend(user);}
 
     @Override
-    public void DelFriend(User user) {userMapper.DelFriend(user);}
+    public void deleteFriend(User user) {userMapper.deleteFriend(user);}
 
     @Override
-    public int SelUsername(String username) {return userMapper.SelUsername(username);}
+    public int selectUserName(String username) {return userMapper.selectUserName(username);}
 }

@@ -7,33 +7,36 @@ import java.util.List;
 
 @Mapper
 public interface BlogMapper {
-    //查询
-    List<Blog> SelBlog(int userid);
+    //查询博客
+    List<Blog> selectBlog(String userId);
 
     //查询别人的博客
-    List<Blog> SelOtherBlog(int userid);
+    List<Blog> selectOtherBlog(String userId);
 
     //写博客
-    void InsBlog(Blog blog);
+    void insertBlog(Blog blog);
 
     //显示博客
-    Blog ShowBlog(int blogid);
+    Blog showBlog(String blogId);
 
     //修改博客
-    void EditBlog(Blog blog);
+    void editBlog(Blog blog);
 
     //插入评论
-    void InsRemark(Blog blog);
+    void insertComment(Blog blog);
 
     //查找评论
-    List<Blog> SelRemark(Blog blog);
+    List<Blog> selectComment(Blog blog);
 
     //删除博客
-    void DelBlog(int bid);
+    void deleteBlog(String blogId);
 
     //查找推荐博客
-    List<Blog> SelrecommendBlog();
+    List<Blog> selectRecommendBlog();
 
     //删除评论
-    void Delremark(int rid);
+    void deleteComment(String commentId);
+
+    //查找博客ID
+    String selectBlogId(String cid);
 }

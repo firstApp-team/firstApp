@@ -1,12 +1,15 @@
 package com.springboot.model;
+
+import java.util.UUID;
+
 //TODO id字段表意不清楚,所有主键都改为UUID类型
 public class Blog {
-    int bid;
-    int id;
+    String bid;
+    String uid;
     String text;
     int rank;
     String bname;
-    int rid;
+    String cid;
     //判断登陆人与评论人是否一致
     int remark_status;
 
@@ -14,12 +17,13 @@ public class Blog {
         super();
     }
 
-    public Blog(int bid,int id,String text,String bname){
+    public Blog(String bid,String uid,String text,String bname,String cid){
         super();
         this.bid = bid;
-        this.id = id;
+        this.uid = uid;
         this.text = text;
         this.bname = bname;
+        this.cid = cid;
     }
 
     public int getRank() {
@@ -38,28 +42,32 @@ public class Blog {
         this.bname = bname;
     }
 
-    public int getRid() {
-        return rid;
+    public String getCid() {
+        return cid;
     }
 
-    public void setRid(int rid) {
-        this.rid = rid;
-    }
-
-    public int getBid() {
-        return bid;
-    }
-
-    public void setBid(int bid) {
+    public void setBid(String bid){
         this.bid = bid;
     }
 
-    public int getUid() {
-        return id;
+    public void setCid() {
+        this.cid = UUID.randomUUID().toString().replaceAll("-","");
     }
 
-    public void setUid(int id) {
-        this.id = id;
+    public String getBid() {
+        return bid;
+    }
+
+    public void setBid() {
+        this.bid = UUID.randomUUID().toString().replaceAll("-","");
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getText() {

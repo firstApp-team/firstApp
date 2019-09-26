@@ -1,27 +1,28 @@
 package com.springboot.model;
 
+import java.util.UUID;
+
 /**
  * Created by duyuqiang on 2019/9/4.
  */
 public class User {
 
-    private int id;
+    private String uid;
     private String password;
+    private String fid;
+    private String name;
 
-    public int getFid() {
+    public String getFid() {
         return fid;
     }
 
-    public void setFid(int fid) {
+    public void setFid(String fid) {
         this.fid = fid;
     }
 
-    private int fid;
-    private String name;
-
-    public User(int Id,int fid,String name){
+    public User(String uid,String fid,String name){
         super();
-        this.id = Id;
+        this.uid = uid;
         this.fid = fid;
         this.name = name;
     }
@@ -30,12 +31,16 @@ public class User {
         super();
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return uid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId() {
+        this.uid = UUID.randomUUID().toString().replaceAll("-","");
+    }
+
+    public void setId(String id) {
+        this.uid = id;
     }
 
     public String getName() {
@@ -56,6 +61,6 @@ public class User {
 
     @Override
     public String toString(){
-        return "User [id="+id+",name="+name+"]";
+        return "User [id="+uid+",name="+name+"]";
     }
 }

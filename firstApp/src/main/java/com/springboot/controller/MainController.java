@@ -9,11 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RestController
 public class MainController {
-    @RequestMapping(value="/")
+    @RequestMapping(value="/aaa")
     public ModelAndView home(){
 //        ModelAndView mv = new ModelAndView("redirect:/showallblog");
 //        mv.setViewName("showallblog");
-        ModelAndView mv = new ModelAndView("redirect:/blog");
+        ModelAndView mv = new ModelAndView("redirect:/blog/show");
         return mv;
     }
 }

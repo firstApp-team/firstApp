@@ -9,23 +9,23 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper{
 //    查询
-    User Sel(User user);
+    User checkLoginUser(User user);
 
     //查询是否存在同名用户
-    int SelUsername(String username);
+    int selectUserName(String username);
 
 //    注册
-    void Regist(User user);
+    void registUser(User user);
 
     //根据uid查询用户
-    User SelUser(int id);
+    User selectUser(String userId);
 
     //加好友
-    void InsFriend(User user);
+    void insertFriend(User user);
 
     //查询好友
-    int SelFriend(User user);
+    int selectFriend(User user);
 
     //删除好友
-    void DelFriend(User user);
+    void deleteFriend(User user);
 }

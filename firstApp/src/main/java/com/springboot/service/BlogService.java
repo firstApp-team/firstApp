@@ -14,47 +14,51 @@ public class BlogService implements BlogMapper{
 
     //查找博客
     @Override
-    public List<Blog> SelBlog(int userid){
-        return blogMapper.SelBlog(userid);
+    public List<Blog> selectBlog(String  userid){
+        return blogMapper.selectBlog(userid);
     }
 
     //插入新博客
     @Override
-    public void InsBlog(Blog blog){
-        blogMapper.InsBlog(blog);
+    public void insertBlog(Blog blog){
+        blogMapper.insertBlog(blog);
     }
 
     //显示博客
     @Override
-    public Blog ShowBlog(int blogid){
-        return blogMapper.ShowBlog(blogid);
+    public Blog showBlog(String blogId){
+        return blogMapper.showBlog(blogId);
     }
 
     //修改博客
     @Override
-    public void EditBlog(Blog blog){blogMapper.EditBlog(blog);}
+    public void editBlog(Blog blog){blogMapper.editBlog(blog);}
 
     //推荐别人的博客
     @Override
-    public List<Blog> SelOtherBlog(int userid){return blogMapper.SelOtherBlog(userid);}
+    public List<Blog> selectOtherBlog(String userId){return blogMapper.selectOtherBlog(userId);}
 
     //插入评论
     @Override
-    public void InsRemark(Blog blog){blogMapper.InsRemark(blog);}//TODO 评论的常用英文是comment
+    public void insertComment(Blog blog){blogMapper.insertComment(blog);}//TODO 评论的常用英文是comment
 
     //查找评论
     @Override
-    public List<Blog> SelRemark(Blog blog) {return blogMapper.SelRemark(blog);}
-
-    //删除博客
-    @Override
-    public void DelBlog(int blogid){blogMapper.DelBlog(blogid);}
-
-    //推荐博客
-    @Override
-    public List<Blog> SelrecommendBlog(){return blogMapper.SelrecommendBlog();}
+    public List<Blog> selectComment(Blog blog) {return blogMapper.selectComment(blog);}
 
     //删除评论
     @Override
-    public void Delremark(int rid){blogMapper.Delremark(rid);}
+    public void deleteComment(String commentId){blogMapper.deleteComment(commentId);}
+
+    //删除博客
+    @Override
+    public void deleteBlog(String blogId){blogMapper.deleteBlog(blogId);}
+
+    //推荐博客
+    @Override
+    public List<Blog> selectRecommendBlog(){return blogMapper.selectRecommendBlog();}
+
+    //查找博客ID
+    @Override
+    public String selectBlogId(String cid){return blogMapper.selectBlogId(cid);}
 }

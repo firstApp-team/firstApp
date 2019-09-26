@@ -10,60 +10,69 @@
     User类就是users表所对应的实体类
     -->
     <resultMap id="BlogList" type="com.springboot.model.Blog">
-        <result column="bid" jdbcType="INTEGER" property="bid" />
-        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="cid" jdbcType="VARCHAR" property="cid" />
+        <result column="bid" jdbcType="VARCHAR" property="bid" />
+        <result column="uid" jdbcType="VARCHAR" property="uid" />
         <result column="bname" jdbcType="VARCHAR" property="bname" />
         <result column="text" jdbcType="VARCHAR" property="text" />
         <result column="rank" jdbcType="INTEGER" property="rank" />
         <result column="remark_status" jdbcType="INTEGER" property="remark_status" />
     </resultMap>
     <!-- 根据uid查询得到一个uid下的所有博客-->
-    <select id="SelBlog"
+    <select id="selectBlog"
             resultMap="BlogList"> <!-- 创建对应user实体类的位置 -->
-        select * from test.t_blog where id=#{id} and status =1 order by bid;
+        select * from test.t_blog where uid=#{uid} and status =1 order by bid;
     </select>
 
     <!-- 根据bid查询得到一个博客的内容-->
-    <select id="ShowBlog"
+    <select id="showBlog"
             resultType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
         select * from test.t_blog where bid=#{bid};
     </select>
 
-    <insert id="InsBlog" parameterType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
-        insert into test.t_blog(id,bname,text,status) values(#{id},#{bname},#{text},1);
+    <!--新建博客-->
+    <insert id="insertBlog" parameterType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
+        insert into test.t_blog(bid,uid,bname,text,status) values(#{bid},#{uid},#{bname},#{text},1);
     </insert>
 
     <!--根据bid更新博客-->
-    <update id="EditBlog" parameterType="com.springboot.model.Blog">
+    <update id="editBlog" parameterType="com.springboot.model.Blog">
         update test.t_blog set bname=#{bname},text=#{text} where bid=#{bid}
     </update>
 
     <!--根据uid查询不属于本人的博客-->
-    <select id="SelOtherBlog" resultMap="BlogList">
-        select * from t_blog where id!=#{id} and status = 1 order by bid limit 10
+    <select id="selectOtherBlog" resultMap="BlogList">
+        select * from t_blog where uid!=#{uid} and status = 1 order by bid limit 10
     </select>
 
     <!--插入评论-->
-    <insert id="InsRemark" parameterType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
-        insert into test.t_remark(bid,id,text,status) values(#{bid},#{id},#{text},1);
+    <insert id="insertComment" parameterType="com.springboot.model.Blog"> <!-- 创建对应user实体类的位置 -->
+        insert into test.t_comment(cid,bid,uid,text,status) values(#{cid},#{bid},#{uid},#{text},1);
     </insert>
 
     <!--查找评论-->
-    <select id="SelRemark" parameterType="com.springboot.model.Blog" resultMap="BlogList"> <!-- 创建对应user实体类的位置 -->
-        select t.*,case when id=#{id} then 1 else 0 end remark_status from t_remark t where t.bid=#{bid} and t.status = 1 order by rid limit 10;
+    <select id="selectComment" parameterType="com.springboot.model.Blog" resultMap="BlogList"> <!-- 创建对应user实体类的位置 -->
+        select t.*,case when uid=#{uid} then 1 else 0 end remark_status from t_comment t where t.bid=#{bid} and t.status = 1 order by cid limit 10;
     </select>
 
-    <update id="DelBlog" parameterType="Integer">
+    <!--删除博客-->
+    <update id="deleteBlog">
         update test.t_blog set status = 0 where bid=#{bid}
     </update>
 
     <!--获得推荐博客-->
-    <select id="SelrecommendBlog" resultMap="BlogList">
+    <select id="selectRecommendBlog" resultMap="BlogList">
         select * from t_blog where status = 1 order by bid limit 10
     </select>
 
     <!--删除评论-->
-    <update id="Delremark">
-        update t_remark set status = 0 where rid = #{rid}
+    <update id="deleteComment">
+        update t_comment set status = 0 where cid = #{cid}
     </update>
+
+    <!--通过评论ID查找博客ID-->
+    <select id="selectBlogId" resultType="STRING">
+        select bid from t_comment where cid = #{cid}
+    </select>
+
 </mapper>
