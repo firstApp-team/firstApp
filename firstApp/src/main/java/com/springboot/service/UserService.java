@@ -5,6 +5,8 @@ import com.springboot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by duyuqiang on 2019/9/5.
  */
@@ -37,4 +39,16 @@ public class UserService implements  UserMapper{
 
     @Override
     public int selectUserName(String username) {return userMapper.selectUserName(username);}
+
+    @Override
+    public List<User> showFriend(String id){return userMapper.showFriend(id);}
+
+    @Override
+    public void queryFriend(String fid){userMapper.queryFriend(fid);}
+
+    @Override
+    public List<User> selectQueryFriend(String id){return userMapper.selectQueryFriend(id);}
+
+    @Override
+    public void deleteQueryFriend(String id){userMapper.deleteQueryFriend(id);}
 }

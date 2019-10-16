@@ -3,6 +3,8 @@ package com.springboot.dao;
 import com.springboot.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * Created by duyuqiang on 2019/9/5.
  */
@@ -28,4 +30,16 @@ public interface UserMapper{
 
     //删除好友
     void deleteFriend(User user);
+
+    //显示好友
+    List<User> showFriend(String id);
+
+    //确认好友
+    void queryFriend(String fid);
+
+    //检查申请好友请求
+    List<User> selectQueryFriend(String id);
+
+    //删除好友请求
+    void deleteQueryFriend(String id);
 }

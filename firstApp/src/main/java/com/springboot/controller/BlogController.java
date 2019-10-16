@@ -7,8 +7,10 @@ import com.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,7 +34,7 @@ public class BlogController {
 
 
   @RequestMapping(value = "/blog/show")
-    public ModelAndView getBlog(HttpSession session){
+    public ModelAndView getBlog(HttpSession session, HttpServletResponse response){
         //定义推荐博客
         List<Blog> recommendBlog = null;
         //TODO 使用驼峰命名法,大量方法和变量存在本问题,自行检查,也包括Mapper和Service中的,同时方法命名需要调整,取消简写,如selBlog改为selectBlog,尽可能的让方法名可以说明方法功能
@@ -42,11 +44,17 @@ public class BlogController {
         }else{
             //获取登录用户ID
             String userId = session.getAttribute("userId").toString();
+            //检查申请好友请求
+            List<User> user = userService.selectQueryFriend(userId);
+            mv.addObject("user",user);
             //获取非登陆人的博客信息
             recommendBlog = blogService.selectOtherBlog(userId);
             //获取登录人的博客信息
             List<Blog> blog = blogService.selectBlog(userId);
             mv.addObject("blog",blog);
+            //获取登录人的好友
+            List<User> friends = userService.showFriend(userId);
+            mv.addObject("friends",friends);
         }
         mv.setViewName("blog");
         mv.addObject("recommendblog",recommendBlog);
@@ -234,5 +242,16 @@ public class BlogController {
         mv.setViewName("exituser");
         mv.addObject("ie","/blog/show");
         return mv;
+    }
+
+    @RequestMapping(value = "/queryFriend")
+    @ResponseBody
+    public void queryFriend(HttpSession session,Boolean rs){
+        String userid = session.getAttribute("userId").toString();
+        if(rs){
+            userService.queryFriend(userid);
+        }else{
+            userService.deleteQueryFriend(userid);
+        }
     }
 }

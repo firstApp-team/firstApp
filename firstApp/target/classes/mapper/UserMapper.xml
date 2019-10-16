@@ -37,7 +37,7 @@
 
     <!--加好友-->
     <insert id="insertFriend" parameterType="com.springboot.model.User">
-        insert into test.t_friend value (#{uid},#{fid},1)
+        insert into test.t_friend value (#{uid},#{fid},2)
     </insert>
 
     <!--查找好友-->
@@ -48,5 +48,25 @@
     <!--删除好友-->
     <delete id="deleteFriend" parameterType="com.springboot.model.User">
         delete from test.t_friend where uid=#{uid} and fid=#{fid}
+    </delete>
+
+    <!--显示好友-->
+    <select id="showFriend" resultMap="BaseResultMap" parameterType="String">
+        select u.id,name from t_friend f join t_user u on f.fid = u.id where f.uid=#{id} and status = 1
+    </select>
+
+    <!--确认好友-->
+    <update id="queryFriend" parameterType="String">
+        update t_friend set status = 1 where fid = #{fid}
+    </update>
+    
+    <!--检查申请好友请求-->
+    <select id="selectQueryFriend" parameterType="String" resultMap="BaseResultMap">
+        select u.id,name from t_friend f join t_user u on f.uid = u.id where fid=#{id} and status=2
+    </select>
+
+    <!--删除好友申请-->
+    <delete id="deleteQueryFriend" parameterType="String">
+        delete from t_friend where fid=#{id} and status = 2
     </delete>
 </mapper>
